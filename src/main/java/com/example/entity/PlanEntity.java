@@ -4,7 +4,10 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,8 +16,11 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name="PLAN_MASTER")
 public class PlanEntity {
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="PLAN_ID")
 	private Integer planId;
 	
 	@Column(name="PLAN_NAME")
@@ -38,10 +44,10 @@ public class PlanEntity {
 	private String updatedBy;
 	
 	@Column(name="CREATED_DATE", updatable=false)
-	@CreationTimestamp
+	//@CreationTimestamp
 	private LocalDate createDate ;
 	
 	@Column(name="UPDATE_DATE", insertable=false)
-	@UpdateTimestamp
+	//@UpdateTimestamp
 	private LocalDate updateDate;
 }

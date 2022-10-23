@@ -1,6 +1,8 @@
 package com.example.controller;
 
-import org.hibernate.mapping.Map;
+
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,7 @@ import com.example.binding.CreateCaseResponse;
 import com.example.service.DcService;
 
 @RestController
-public class CreateRestController {
+public class CreateCaseRestController {
     
 	@Autowired
 	private DcService  service ;
@@ -23,7 +25,7 @@ public class CreateRestController {
 		
 		Long caseNum= service.loadCaseNum(appId);
 		
-		Map<Integer,String> plansMap=service.getPlanNames();
+		Map<Integer, String> plansMap=service.getPlanNames();
 		
 		CreateCaseResponse response =  new CreateCaseResponse();
 		response.setCaseNum(caseNum);

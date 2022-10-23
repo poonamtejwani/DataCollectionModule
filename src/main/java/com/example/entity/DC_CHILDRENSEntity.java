@@ -18,9 +18,11 @@ public class DC_CHILDRENSEntity {
 	@GeneratedValue
 	private Integer childId;
 	
-	private LocalDate childdob;
+	private LocalDate childAge;
 	
 	private Long childSsn;
+	
+	private Long caseNum;
 	
 	
 		

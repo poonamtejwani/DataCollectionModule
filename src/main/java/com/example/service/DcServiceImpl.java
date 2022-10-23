@@ -89,9 +89,12 @@ public class DcServiceImpl implements DcService {
 	public Long saveChildren(ChildRequest request) {
 		
 		List<Child> childs= request.getChilds();
+		Long caseNum=request.getCaseNum();
+		
 		for(Child c : childs) {
 			DC_CHILDRENSEntity entity= new DC_CHILDRENSEntity();
 			BeanUtils.copyProperties(c, entity);
+			entity.setCaseNum(caseNum);
 			childrenRepo.save(entity);
 		}
 		return request.getCaseNum();
@@ -102,9 +105,10 @@ public class DcServiceImpl implements DcService {
 	public DCSummary getSummary(Long caseNum) {
 		String planName= "";
 		
-		DC_INCOMEEntity incomeEntity = incomeRepo.finsByCaseNum(caseNum);
+		DC_INCOMEEntity incomeEntity = incomeRepo.findByCaseNum(caseNum);
 		DC_EDUCATIONEntity educationEntity = educationRepo.findByCaseNum(caseNum);
-		 List<DC_CHILDRENSEntity> childsEntity = childrenRepo.findByCaseNum(caseNum);
+		List<DC_CHILDRENSEntity> childsEntity = childrenRepo.findByCaseNum(caseNum);
+		 
 		 Optional<DC_CASESEntity> dcCase = DccaseRepo.findById(caseNum);
 		 if(dcCase.isPresent())
 		 {
@@ -115,7 +119,7 @@ public class DcServiceImpl implements DcService {
 				  planName = plan.get().getPlanName();
 			 }
 		 }
-		DCSummary summary = new DCSummary();
+		DCSummary summary = new DCSummary();  // Set Summary data
 		summary.setPlanNames(planName);
 		
 		Income income= new Income();
@@ -171,9 +175,6 @@ public class DcServiceImpl implements DcService {
 		return null;
 	}
 
-
-
-	
-	
+	 
 
 }
